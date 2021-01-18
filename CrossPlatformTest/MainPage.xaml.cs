@@ -7,6 +7,7 @@ using Firebase.Storage;
 using System.Drawing;
 using System.IO;
 using System.Web;
+using Java.Util.Zip;
 
 namespace CrossPlatformTest
 {
@@ -14,7 +15,7 @@ namespace CrossPlatformTest
     {
 
         private static IEnumerable<FileResult> pickedFiles;
-        
+
     
         public MainPage()
         {
@@ -31,6 +32,8 @@ namespace CrossPlatformTest
 
         private async void ChooseFile_Pressed(object sender, EventArgs e)
         {
+
+            int index = 0;
             pickedFiles = await FilePicker.PickMultipleAsync(new PickOptions
             {
                 FileTypes = FilePickerFileType.Images,
@@ -41,8 +44,8 @@ namespace CrossPlatformTest
             {
                 foreach(var file in pickedFiles)
                 {
-                    file.ContentType = "application/x-www-form-urlencoded";
-                    lbl.Text += file.FileName;
+                    lbl.Text += file.FullPath;
+                    index++;
                 }
             }
             else
@@ -58,12 +61,24 @@ namespace CrossPlatformTest
             try
             {
                 string dlURL = null;
-                foreach (var f in pickedFiles)
-                {
-                    var newstream = await f.OpenReadAsync();
 
-                    dlURL += await UploadFile(newstream, f.FileName) + "\n";
+                var cacheDir = FileSystem.CacheDirectory;
+                var zipPath = $"FileTransfer_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.zip";
+                List<string> filepath = new List<string>();
+
+                foreach(var f in pickedFiles)
+                {
+                    filepath.Add(f.FullPath);
                 }
+
+
+                ZipAndShip(filepath, cacheDir, zipPath);
+
+                FileStream fs = File.OpenRead(cacheDir +zipPath);
+
+                dlURL = await UploadFile(fs, zipPath);
+
+                fs.Close();
 
                 dlURL = HttpUtility.HtmlEncode(dlURL);
                 await DisplayAlert("Upload Successful!", dlURL , "Ok");
@@ -86,6 +101,45 @@ namespace CrossPlatformTest
                 .PutAsync(fileStream);
 
             return fileURL;
+        }
+
+        public void ZipAndShip(List<string> filecollection, string zipDir, string zipPath)
+        {
+            if (Directory.Exists(zipDir))
+            {
+                FileStream fos;
+                ZipOutputStream zos;
+                try
+                {
+                    fos = new FileStream(zipDir + zipPath, FileMode.Create);
+                    zos = new ZipOutputStream(fos);
+
+                    foreach (var f in filecollection)
+                    {
+                        
+                        ZipEntry zipe = new ZipEntry(f.Substring(f.LastIndexOf("/") + 1));
+                        zos.PutNextEntry(zipe);
+
+                        byte[] filedata = File.ReadAllBytes(f);
+                        zos.Write(filedata);
+                        zos.CloseEntry();
+
+                    }
+                    zos.Close();
+                    fos.Close();
+                    //zos.Close();
+
+                }
+                catch(Exception e)
+                {
+                    DisplayAlert("ERROR", e.ToString(), "Ok");
+                }
+
+            }
+            else
+            {
+                DisplayAlert("ERROR", "Directory does not exist", "Ok");
+            }
         }
     }
 
