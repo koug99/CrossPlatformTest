@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "673749478037",
+    "project_id": "universalfiletransfer",
+    "storage_bucket": "universalfiletransfer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673749478037:android:37e503c3be92a9259e099c",
+        "android_client_info": {
+          "package_name": "xamarin.crossplatformtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673749478037-amggund2c57kl2m59vm3qqted938ihmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPgHVxbCZJb9KjZ5gX9pJQTsAHzw0R2YE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673749478037-amggund2c57kl2m59vm3qqted938ihmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
