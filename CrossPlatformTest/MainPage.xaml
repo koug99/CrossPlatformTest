@@ -14,10 +14,11 @@
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
-            
-            <ImageButton x:Name="img" Grid.Row="0" Grid.Column="0" Source="image.png" Clicked="ChooseFile_Pressed" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="100" WidthRequest="100" CornerRadius="50" BorderWidth="2" BorderColor="Black" Padding="10" BackgroundColor="AliceBlue" />
-            <ImageButton x:Name="vid" Grid.Row="0" Grid.Column="1" Source="video.png" Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  VerticalOptions="Center" HeightRequest="100" WidthRequest="100" CornerRadius="50" BorderWidth="2" BorderColor="Black" Padding="10" BackgroundColor="AliceBlue"/>
-            <ImageButton x:Name="fil" Grid.Row="0" Grid.Column="2" Source="file.png"  Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  VerticalOptions="Center" HeightRequest="100" WidthRequest="100" CornerRadius="50" BorderWidth="2" BorderColor="Black" Padding="10" BackgroundColor="AliceBlue"/>
+
+
+            <ImageButton x:Name="img" Grid.Row="0" Grid.Column="0" Source="image.png" Clicked="ChooseFile_Pressed" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="100" WidthRequest="100" CornerRadius="50" BorderWidth="2" BorderColor="Black" Padding="15" BackgroundColor="AliceBlue" />
+            <ImageButton x:Name="vid" Grid.Row="0" Grid.Column="1" Source="video.png" Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  VerticalOptions="Center" HeightRequest="100" WidthRequest="100" CornerRadius="50" BorderWidth="2" BorderColor="Black" Padding="15" BackgroundColor="AliceBlue"/>
+            <ImageButton x:Name="fil" Grid.Row="0" Grid.Column="2" Source="file.png"  Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  VerticalOptions="Center" HeightRequest="100" WidthRequest="100" CornerRadius="50" BorderWidth="2" BorderColor="Black" Padding="15" BackgroundColor="AliceBlue"/>
             
         </Grid>
 
