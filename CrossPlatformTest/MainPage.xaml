@@ -1,11 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CrossPlatformTest.MainPage">
+             x:Class="CrossPlatformTest.MainPage" Visual="Material">
 
     <StackLayout>
-        <Button Text="Pick File" Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  
-               VerticalOptions="Center"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" />
+            </Grid.ColumnDefinitions>
+            
+            <ImageButton x:Name="img" Grid.Row="0" Grid.Column="0" Source="image.png" Clicked="ChooseFile_Pressed" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="70" WidthRequest="70" CornerRadius="35" BorderWidth="2" BorderColor="Black" Padding="10" BackgroundColor="AliceBlue" />
+            <ImageButton x:Name="vid" Grid.Row="0" Grid.Column="1" Source="video.png" Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  VerticalOptions="Center" HeightRequest="70" WidthRequest="70" CornerRadius="35" BorderWidth="2" BorderColor="Black" Padding="10" BackgroundColor="AliceBlue"/>
+            <ImageButton x:Name="fil" Grid.Row="0" Grid.Column="2" Source="file.png"  Clicked="ChooseFile_Pressed" HorizontalOptions="Center"  VerticalOptions="Center" HeightRequest="70" WidthRequest="70" CornerRadius="35" BorderWidth="2" BorderColor="Black" Padding="10" BackgroundColor="AliceBlue"/>
+            
+        </Grid>
+        
         <Label  x:Name="lbl" Text="File Name: " />
         <Image x:Name="resultImage"/>
         <Button Text="UPLOAD" Clicked="UploadButton_Clicked" HorizontalOptions="Center" VerticalOptions="Center"/>
