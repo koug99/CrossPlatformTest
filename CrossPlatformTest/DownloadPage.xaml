@@ -5,14 +5,18 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
              xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing"
              Visual="Material">
-    <StackLayout>
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Label x:Name="lbl" Text="Scan to Download"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        <zxing:ZXingBarcodeImageView x:Name="GenBarcode" BarcodeFormat="QR_CODE" BarcodeValue="" WidthRequest="500" HeightRequest="500">
+        
+        <zxing:ZXingBarcodeImageView x:Name="GenBarcode" BarcodeFormat="QR_CODE" BarcodeValue="" WidthRequest="500" HeightRequest="500" VerticalOptions="Center" HorizontalOptions="Center">
             <zxing:ZXingBarcodeImageView.BarcodeOptions>
                 <zxingcommon:EncodingOptions Height="500" Width="500"/>
             </zxing:ZXingBarcodeImageView.BarcodeOptions>
         </zxing:ZXingBarcodeImageView>
+
+
+        <Button x:Name="terminate" Clicked="terminate_Clicked" Text="TERMINATE" BackgroundColor="DarkRed" TextColor="WhiteSmoke" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" BorderColor="Black" BorderWidth="2"/>
     </StackLayout>
 </ContentPage>

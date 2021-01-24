@@ -120,13 +120,13 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CrossPlatformTest\CrossPlatformTest.csproj">
       <Project>{107F4793-F130-437E-8D14-BCBB27865F79}</Project>
       <Name>CrossPlatformTest</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\file.png" />
   </ItemGroup>

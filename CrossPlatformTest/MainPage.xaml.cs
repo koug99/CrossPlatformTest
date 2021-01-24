@@ -16,21 +16,26 @@ namespace CrossPlatformTest
     {
 
         private static IEnumerable<FileResult> pickedFiles;
+        private static int index;
+        public static string fileID;
 
     
         public MainPage()
         {
+            
             InitializeComponent();
-            var deviceID = Preferences.Get("my_deviceID", string.Empty);
-            if (string.IsNullOrWhiteSpace(deviceID))
-            {
-                
-                deviceID = System.Guid.NewGuid().ToString();
-                Preferences.Set("my_deviceID", deviceID);
-            }
+            
  
         }
-
+        
+        protected override void OnDisappearing()
+        {
+            pickedFiles = null;
+            index = 0;
+            selectLabel.IsVisible = false;
+            upload.IsEnabled = false;
+        }
+    
 
         private async void ChooseFile_Pressed(object sender, EventArgs e)
         {
@@ -46,7 +51,7 @@ namespace CrossPlatformTest
                 fileType = FilePickerFileType.Videos;
             }
 
-            int index = 0;
+
             pickedFiles = await FilePicker.PickMultipleAsync(new PickOptions
             {
                 FileTypes = fileType,
@@ -55,15 +60,17 @@ namespace CrossPlatformTest
 
             if (pickedFiles != null)
             {
-                foreach(var file in pickedFiles)
+                foreach(var fi in pickedFiles)
                 {
-                    lbl.Text += file.FullPath;
                     index++;
                 }
+                selectLabel.Text = $"{index} file(s) selected.";
+                selectLabel.IsVisible = true;
+                upload.IsEnabled = true;
             }
             else
             {
-                await DisplayAlert("ERROR", "file not picked", "OK");
+                //await DisplayAlert("ERROR", "file not picked", "OK");
             }
         }
         
@@ -86,20 +93,23 @@ namespace CrossPlatformTest
 
                 if (filepath.Count > 1)
                 {
+                    fileID = zipPath;
                     ZipAndShip(filepath, cacheDir, zipPath);
                     FileStream fs = File.OpenRead(cacheDir + zipPath);
-                    dlURL = await UploadFile(fs, zipPath);
+                    dlURL = await UploadFile(fs, fileID);
                     fs.Close();
                 }
                 else
                 {
+                    fileID = filepath[0].Substring(filepath[0].LastIndexOf("/") + 1);
                     FileStream fs = File.OpenRead(filepath[0]);
-                    dlURL = await UploadFile(fs, filepath[0].Substring(filepath[0].LastIndexOf("/") + 1));
+                    dlURL = await UploadFile(fs, fileID);
                     fs.Close();
                 }
                 dlURL = HttpUtility.HtmlEncode(dlURL);
-                await DisplayAlert("Upload Successful!", dlURL, "Ok");
-                await Navigation.PushAsync(new DownloadPage(dlURL));
+                await DisplayAlert("Upload Successful!", "QR Code generated for sharing.", "Ok");
+                
+                await Navigation.PushAsync(new DownloadPage(dlURL,fileID));
 }
             catch (Exception ex)
             {
