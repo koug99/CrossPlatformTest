@@ -29,8 +29,18 @@ namespace CrossPlatformTest
 
         protected override async void OnDisappearing()
         {
-                await DeleteFiles(); 
+                
         }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            await Task.Delay(5000);
+            await DeleteFiles();
+            await this.DisplayAlert("Transfer Time Ended.", "Transfer has been terminated. Files have been deleted from server.", "OK");
+            await this.Navigation.PopToRootAsync();
+        }
+
         protected override bool OnBackButtonPressed()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -39,6 +49,7 @@ namespace CrossPlatformTest
 
                 if (result)
                 {
+                    await DeleteFiles();
                     await this.Navigation.PopAsync();
                 }
             });

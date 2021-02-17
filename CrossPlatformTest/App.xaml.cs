@@ -25,6 +25,10 @@ namespace CrossPlatformTest
             var cacheDir = FileSystem.CacheDirectory;
         }
 
+        protected override void CleanUp()
+        {
+        }
+
         protected override void OnSleep()
         {
         }

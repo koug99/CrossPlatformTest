@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CrossPlatformTest.FileView" Title="Files Preview">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <CarouselView x:Name="preview" IsVisible="True" ItemsSource="{Binding Files}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame  HasShadow="True"
+                                   IsVisible="True"
+                                   BorderColor="Black"
+                                   CornerRadius="5"
+                                   Margin="20"
+                                   HeightRequest="500"
+                                   WidthRequest="500"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Start">
+                                <StackLayout>
+                                    <Label TextColor="Black" Text="{Binding FileName}"></Label>
+                                    <Image Source="{Binding FullPath}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="500"
+                                           WidthRequest="500"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <StackLayout>
+                <Grid x:Name="controlgrid" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="30*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center">Transfer Time:</Label>
+                    <Picker x:Name="timer"
+                    Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Start" >
+                        <Picker.Items>
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                            <x:String>4</x:String>
+                            <x:String>5</x:String>
+                        </Picker.Items>
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                    </Picker>
+                    <Label Grid.Row="0" Grid.Column="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center">min</Label>
+
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center"> Fast</Label>
+                    <Switch Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand"></Switch>
+                    <Label Grid.Row="1" Grid.Column="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center">Quality</Label>
+
+                </Grid>
+                
+                
+                
+
+                <Button x:Name="upload" BackgroundColor="ForestGreen" IsEnabled="True" Text="UPLOAD" Clicked="UploadButton_Clicked" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Margin="50" Padding="30"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
